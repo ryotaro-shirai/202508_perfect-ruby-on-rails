@@ -1,21 +1,6 @@
 version: "3"
 
 services:
-  02-book-admin-mysql:
-    container_name: 02-book-admin-mysql
-    image: mysql:8.0
-    environment:
-      TZ: Asia/Tokyo
-    volumes:
-      - mysql_data:/var/lib/mysql
-    ports:
-      - 3307:3306
-    env_file:
-      - .env
-    networks:
-      app_net:
-        ipv4_address: '172.30.0.2'
-
   02-book-admin-app:
     container_name: 02-book-admin-app
     build: ./book_admin/
@@ -30,15 +15,11 @@ services:
       - /app/tmp
       - /app/log
       - /app/.git
-    env_file:
-      - .env
-    depends_on:
-      - 02-book-admin-mysql
     ports:
       - 4000:3000 # ポートフォワード
     networks:
       app_net:
-        ipv4_address: '172.30.0.3'
+        ipv4_address: '172.30.0.1'
 
 networks:
   app_net:
@@ -49,6 +30,4 @@ networks:
         - subnet: 172.30.0.0/24
 
 volumes:
-  mysql_data:
   bundle_data:
-  node_modules:
