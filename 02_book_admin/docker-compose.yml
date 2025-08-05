@@ -14,17 +14,17 @@ services:
       - .env
     networks:
       app_net:
-        ipv4_address: '172.20.0.2'
+        ipv4_address: '172.30.0.2'
 
   02-book-admin-app:
     container_name: 02-book-admin-app
-    build: .
+    build: ./book_admin/
     image: 02-book-admin-app
     command: bundle exec rails server -b 0.0.0.0
     tty: true
     stdin_open: true
     volumes:
-      - .:/app:cached
+      - ./book_admin:/app:cached
       - bundle_data:/usr/local/bundle:cached
       - /app/vendor
       - /app/tmp
@@ -38,7 +38,7 @@ services:
       - 4000:3000 # ポートフォワード
     networks:
       app_net:
-        ipv4_address: '172.20.0.3'
+        ipv4_address: '172.30.0.3'
 
 networks:
   app_net:
@@ -46,7 +46,7 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.20.0.0/24
+        - subnet: 172.30.0.0/24
 
 volumes:
   mysql_data:
