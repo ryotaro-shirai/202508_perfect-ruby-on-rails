@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  02-book-admin:
+    container_name: 02-book-admin
+    build: .
+    image: 02-book-admin
+    command: bundle exec rails server -b 0.0.0.0
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/02_book_admin/
+    ports:
+      - 4000:3000 # ポートフォワード
