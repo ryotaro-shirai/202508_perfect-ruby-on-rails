@@ -14,4 +14,16 @@ class Book < ApplicationRecord
       book.errors.add(:name, "I don't like exercise")
     end
   end
+
+  before_validation :add_lovely_to_cat
+
+  after_destroy do
+    Rails.logger.info "Book is deleted: #{self.attributes}"
+  end
+
+  def add_lovely_to_cat
+    self.name = self.name.gsub(/Cat/) do |matched|
+      "Lovely #{matched}"
+    end
+  end
 end
