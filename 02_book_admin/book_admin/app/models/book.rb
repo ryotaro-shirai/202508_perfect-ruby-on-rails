@@ -26,6 +26,12 @@ class Book < ApplicationRecord
     Rails.logger.warn "Please Check!"
   end
 
+  enum :sales_status, {
+    reservation: 0, # 予約受付
+    now_on_sale: 1, # 販売中
+    end_of_print: 2, # 販売終了
+  }
+
   def add_lovely_to_cat
     self.name = self.name.gsub(/Cat/) do |matched|
       "Lovely #{matched}"
