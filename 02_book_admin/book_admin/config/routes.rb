@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get "profiles/show"
-  get "profiles/edit"
-  get "profiles/update"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -18,4 +15,5 @@ Rails.application.routes.draw do
   get "/books/:id" => "books#show"
   delete "/books/:id" => "books#destroy"
   resources :publishers
+  resource :profile, only: %i{show edit update}
 end
